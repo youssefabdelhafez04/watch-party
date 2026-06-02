@@ -400,16 +400,7 @@ if __name__ == "__main__":
     port = 8000
     tunnel_provider = None
     _public_url = start_cloudflare_tunnel(port)
-    if _public_url:
-        tunnel_provider = "Cloudflare"
-    else:
-        tunnel_provider = "ngrok"
-        try:
-            from pyngrok import ngrok
-            tunnel = ngrok.connect(port)
-            _public_url = tunnel.public_url
-        except Exception:
-            tunnel_provider = None
+    tunnel_provider = "Cloudflare" if _public_url else None
 
     sep = "=" * 54
     print(f"\n{sep}")
